@@ -1,0 +1,127 @@
+<?php
+ob_start();
+session_start();
+include("admin/connect.php");
+if($_GET["exit"]){
+	unset($_SESSION["user_id"]);
+}
+?><!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Travel & Hotel</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
+<link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
+<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+<script type="text/javascript" src="js/jquery-1.4.2.js" ></script>
+<script type="text/javascript" src="js/cufon-yui.js"></script>
+<script type="text/javascript" src="js/cufon-replace.js"></script>  
+<script type="text/javascript" src="js/Myriad_Pro_600.font.js"></script>
+<!--[if lt IE 9]>
+	<script type="text/javascript" src="http://info.template-help.com/files/ie6_warning/ie6_script_other.js"></script>
+	<script type="text/javascript" src="js/html5.js"></script>
+<![endif]-->
+</head>
+<body id="page1">
+<div class="extra">
+	<div class="main">
+<!-- header -->
+			<div class="wrapper">
+				<h1><a href="index.php" id="logo"></a></h1>
+				<div class="right">
+					<!--<div class="wrapper">
+						<form id="search" action="" method="post">
+							<div class="bg">
+								<input type="submit" class="submit" value="">
+								<input type="text" class="input">
+							</div>
+						</form>
+					</div>-->
+						<?php
+					if(!isset($_SESSION["user_id"])){
+					?>
+					<div class="wrapper">
+						<nav>
+							<ul id="top_nav">
+								<li><a href="page.php?s=register">Register</a></li>
+								<li><a href="page.php?s=login">Log In</a></li>
+								
+							</ul>
+						</nav>
+					</div>	
+                    <?php
+					}else{
+					$staffinfo = mysql_fetch_assoc(mysql_query("SELECT * FROM uyelik where id='".$_SESSION["user_id"]."'"));
+					?>
+                    <div class="wrapper">
+						<nav>
+							<ul id="top_nav">
+								 <li><a href="page.php?s=edit"><?php echo $staffinfo["adi_soyadi"];?></a>
+</li><li><a href="index.php?exit=1">LogOut</a></li>
+								
+							</ul>
+						</nav>
+					</div>	
+                    <?php
+					}
+					?>
+				</div>
+			</div>
+			<nav>
+				<ul id="menu">
+					<li><a href="index.php" class="nav1">Home</a></li>
+					<li><a href="page.php?s=about" class="nav2">About Us </a></li>
+					<li><a href="page.php?s=travels" class="nav3">Travel</a></li>
+					<li><a href="page.php?s=destinations" class="nav4">Destinations</a></li>
+					<li class="end"><a href="page.php?s=contact" class="nav5">Contacts</a></li>
+				</ul>
+			</nav>
+		
+<!-- / header -->
+<!-- content -->
+<section id="content">
+				<ul class="tabs">
+					<!--<li><a href="#">Flight</a></li>-->
+					<li><a href="#" class="active">Hotel</a></li><!--
+					<li><a href="#">Car</a></li>
+					<li class="end"><a href="#">Cruise</a></li>-->
+				</ul>
+				<div class="tabs_cont">
+					<?php
+                    include("rezerve.php");
+                    ?>
+				</div>
+		<article class="col2 pad_left1">
+			  <h2>travel</h2>
+              <?php
+$s = mysql_query("select * from tur");
+while ($ls = mysql_fetch_array($s)) {
+	?>
+				<div class="wrapper under">
+					<figure class="left marg_right1"><img src="admin/images/<?php echo $ls["resim"]; ?>" width="246" height="194"></figure>
+					<p class="pad_bot2"><strong><?php echo $ls["baslik"]; ?></strong></p>
+					<p class="pad_bot2"><?php echo $ls["aciklama"]; ?></p>
+					
+				</div>
+                <?php
+}
+				?>
+				
+	  </article>
+	  </section>
+<!-- / content -->
+	</div>
+	<div class="block"></div>
+</div>
+<div class="body1">
+	<div class="main">
+<!-- footer -->
+		<footer>
+			Copyright © 2013
+		</footer>
+<!-- / footer -->
+	</div>
+</div>
+<script type="text/javascript"> Cufon.now(); </script>
+</body>
+</html>
