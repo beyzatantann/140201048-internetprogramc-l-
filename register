@@ -1,0 +1,36 @@
+<?php
+	$name=$_POST['name'];
+	$email=$_POST['email'];
+	$password=md5($_POST['password']);
+	$rpassword=md5($_POST['rpassword']);
+	$tc=$_POST['tc'];
+	$telephone=$_POST['telephone'];
+	$address=$_POST['address'];
+	$city=$_POST['city'];
+	$country=$_POST['country'];
+	if($password==$rpassword){
+	if($_POST["add"]){
+				mysql_query("insert into uyelik values (NULL,'".$tc."','".$name."','".$email."','".$password."','".$address."','".$city."','".$country."','".$telephone."')")or die(mysql_error());
+	//$sid = mysql_insert_id();  
+				echo "Record was made";
+				
+	}
+	}else{
+		echo "The passwords you entered do not match";	
+	}
+	
+?>
+<h2>Register Form</h2>
+				<form id="ContactForm" action="page.php?s=register" method="post">
+					<div>
+						<div class="wrapper"><input type="text" class="input" name="name" >Name Surname:<br /></div>
+						<div class="wrapper"><input type="text" class="input" name="email">E-mail:<br /></div>
+                        <div class="wrapper"><input type="password" class="input" name="password" >Password:<br /></div>
+                        <div class="wrapper"><input type="password" class="input" name="rpassword" >Repait Password:<br /></div>
+						<div class="wrapper"><input type="text" class="input" name="tc" >TC Number :<br /></div><div class="wrapper"><input type="text" class="input" name="telephone" >Telephone Number:<br /></div><div class="wrapper"><input type="text" class="input" name="address" >Address:<br /></div> <div class="wrapper"><input type="text" class="input" name="city" >City:<br /></div>
+                        <div class="wrapper"><input type="text" class="input" name="country" >Country:<br /></div>
+						<a href="#" class="button" onclick="document.getElementById('ContactForm').submit()">send</a>
+						<a href="#" class="button" onclick="document.getElementById('ContactForm').reset()">clear</a>
+					</div>
+                    <input type="hidden" name="add" value="add">
+				</form>
