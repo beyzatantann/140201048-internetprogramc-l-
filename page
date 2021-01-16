@@ -1,0 +1,118 @@
+<?php
+ob_start();
+session_start();
+include("admin/connect.php");
+if($_GET["exit"]){
+	unset($_SESSION["user_id"]);
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Travel &amp; Hotel</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
+<link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
+<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+<script type="text/javascript" src="js/jquery-1.4.2.js" ></script>
+<script type="text/javascript" src="js/cufon-yui.js"></script>
+<script type="text/javascript" src="js/cufon-replace.js"></script>  
+<script type="text/javascript" src="js/Myriad_Pro_600.font.js"></script>
+<!--[if lt IE 9]>
+	<script type="text/javascript" src="http://info.template-help.com/files/ie6_warning/ie6_script_other.js"></script>
+	<script type="text/javascript" src="js/html5.js"></script>
+<![endif]-->
+</head>
+<body id="page2">
+<div class="extra">
+	<div class="main">
+<!-- header -->
+		<header>
+			<div class="wrapper">
+				<h1><a href="index.php" id="logo"></a></h1>
+				<div class="right">
+					<?php
+					if(!isset($_SESSION["user_id"])){
+					?>
+					<div class="wrapper">
+						<nav>
+							<ul id="top_nav">
+								<li><a href="page.php?s=register">Register</a></li>
+								<li><a href="page.php?s=login">Log In</a></li>
+								
+							</ul>
+						</nav>
+					</div>	
+                    <?php
+					}else{
+					$staffinfo = mysql_fetch_assoc(mysql_query("SELECT * FROM uyelik where id='".$_SESSION["user_id"]."'"));
+					?>
+                    <div class="wrapper">
+						<nav>
+							<ul id="top_nav">
+								 <li><a href="page.php?s=edit"><?php echo $staffinfo["adi_soyadi"];?></a>
+</li><li><a href="page.php?exit=1">LogOut</a></li>
+								
+							</ul>
+						</nav>
+					</div>	
+                    <?php
+					}
+					?>
+				</div>
+			</div>
+			<nav>
+				<ul id="menu">
+					<li><a href="index.php" class="nav1">Home</a></li>
+					<li><a href="page.php?s=about" class="nav2">About Us </a></li>
+					<li><a href="page.php?s=travels" class="nav3">Travel</a></li>
+					<li><a href="page.php?s=destinations" class="nav4">Destinations</a></li>
+					<li class="end"><a href="page.php?s=contact" class="nav5">Contact</a></li>
+				</ul>
+			</nav>
+		
+		</header>
+<!-- / header -->
+<!-- content -->
+		<section id="content">
+			
+			<article class="col2 pad_left1">
+			<?php
+            if($_GET["s"]=="register"){
+				include("register.php");
+			}elseif($_GET["s"]=="login"){
+				include("login.php");				
+			}elseif($_GET["s"]=="edit"){
+				include("edit.php");				
+			}elseif($_GET["s"]=="contact"){
+				include("contact.php");				
+			}elseif($_GET["s"]=="about"){
+				include("about.php");				
+			}elseif($_GET["s"]=="destinations"){
+				include("destinations.php");				
+			}elseif($_GET["s"]=="travels"){
+				include("travels.php");				
+			}elseif($_GET["s"]=="rooms"){
+				include("rooms.php");				
+			}elseif($_GET["s"]=="reser"){
+				include("reser.php");				
+			}
+			?>	
+        	</article>
+		</section>
+<!-- / content -->
+	</div>
+	<div class="block"></div>
+</div>
+<div class="body1">
+	<div class="main">
+<!-- footer -->
+		<footer>
+			Copyright © 2013 - LAU
+		</footer>
+<!-- / footer -->
+	</div>
+</div>
+<script type="text/javascript"> Cufon.now(); </script>
+</body>
+</html>
