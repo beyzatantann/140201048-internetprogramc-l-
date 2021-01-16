@@ -1,0 +1,35 @@
+<?php
+$start=$_GET["sy"]."-".$_GET["sm"]."-".$_GET["sd"];
+$end=$_GET["ey"]."-".$_GET["em"]."-".$_GET["ed"];
+?>
+<article class="col2 pad_left1">
+			  <h2>Room</h2>
+              <h3>Date : <?php echo $start." / ".$end;?></h3>
+              <?php
+$s = mysql_query("select * from odalar where bas_tarih>='".$start."' and bit_tarih<='".$end."'");
+while ($ls = mysql_fetch_array($s)) {
+	?>
+				<div class="wrapper under">
+					<figure class="left marg_right1"><img src="admin/images/<?php echo $ls["resim"]; ?>" width="246" height="194"></figure>
+					<p class="pad_bot2"><strong><?php echo $ls["baslik"]; ?></strong></p>
+					<p class="pad_bot2"><?php echo $ls["aciklama"]; ?></p>
+					<p class="pad_bot2"><strong>Price  :</strong><?php echo $ls["fiyat"]; ?></p>
+                    
+                      <?php
+					if(!isset($_SESSION["user_id"])){
+					?>
+                    <p class="pad_bot2">reservations must be made.<a href="page.php?s=login">Login</a></p>
+                    
+                    <?php
+					}else{
+					?>
+								<a href="page.php?s=reser&r=<?=$ls["id"];?>&u=<?=$_SESSION["user_id"];?>&start=<?=$start;?>&end=<?=$end;?>" class="button">reservations</a>
+                                <?php
+					}
+					?>
+				</div>
+                <?php
+}
+				?>
+				
+	  </article>
