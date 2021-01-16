@@ -1,0 +1,45 @@
+<?php
+	$name=$_POST['name'];
+	$email=$_POST['email'];
+	$password=md5($_POST['password']);
+	$rpassword=md5($_POST['rpassword']);
+	$tc=$_POST['tc'];
+	$telephone=$_POST['telephone'];
+	$address=$_POST['address'];
+	$city=$_POST['city'];
+	$country=$_POST['country'];
+	
+	if($_POST["update"]){
+		if($password==$rpassword){
+			if($password=='d41d8cd98f00b204e9800998ecf8427e'){
+		$record="tc='".$tc."',adi_soyadi='".$name."',email='".$email."',adres='".$address."',sehir='".$city."',telefon='".$telephone."',ulke='".$country."'";
+		}else{
+			$record="tc='".$tc."',adi_soyadi='".$name."',email='".$email."',sifre='".$password."',adres='".$address."',sehir='".$city."',telefon='".$telephone."',ulke='".$country."'";
+			
+		}
+				mysql_query("update uyelik set $record where id='".$_SESSION["user_id"]."'")or die(mysql_error());
+	//$sid = mysql_insert_id();  
+				echo "Update was made";
+				
+	}else{
+		echo "The passwords you entered do not match";	
+	}
+	}
+	if($_SESSION["user_id"]){
+	$k=mysql_fetch_assoc(mysql_query("select * from uyelik where id='".$_SESSION["user_id"]."'"));
+}
+?>
+<h2>Staff Edit</h2>
+				<form id="ContactForm" action="page.php?s=edit" method="post">
+					<div>
+						<div class="wrapper"><input type="text" class="input" name="name" value="<?=$k["adi_soyadi"];?>" >Name Surname:<br /></div>
+						<div class="wrapper"><input type="text" class="input" name="email" value="<?=$k["email"];?>">E-mail:<br /></div>
+                        <div class="wrapper"><input type="password" class="input" name="password" >Password:<br /></div>
+                        <div class="wrapper"><input type="password" class="input" name="rpassword" >Repait Password:<br /></div>
+						<div class="wrapper"><input type="text" class="input" name="tc" value="<?=$k["tc"];?>">TC Number :<br /></div><div class="wrapper"><input type="text" class="input" name="telephone" value="<?=$k["telefon"];?>">Telephone Number:<br /></div><div class="wrapper"><input type="text" class="input" name="address" value="<?=$k["adres"];?>">Address:<br /></div> <div class="wrapper"><input type="text" class="input" name="city" value="<?=$k["sehir"];?>" >City:<br /></div>
+                        <div class="wrapper"><input type="text" class="input" name="country" value="<?=$k["ulke"];?>">Country:<br /></div>
+						<a href="#" class="button" onclick="document.getElementById('ContactForm').submit()">Update</a>
+						
+					</div>
+                    <input type="hidden" name="update" value="update">
+				</form>
