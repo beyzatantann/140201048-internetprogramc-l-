@@ -1,0 +1,47 @@
+<?php
+if($_POST["send"]){
+	$name=$_POST['name'];
+	$email=$_POST['email'];
+	$tc=$_POST['tc'];
+	$telephone=$_POST['telephone'];
+	$address=$_POST['address'];
+	$city=$_POST['city'];
+	$country=$_POST['country'];
+	$note=$_POST['note'];
+	$room_id=$_POST['room_id'];
+	$user_id=$_POST['user_id'];
+	$start=$_POST['start'];
+	$end=$_POST['end'];
+	if($_POST["send"]){
+		
+mysql_query("insert into rezervasyon values (NULL,'".$room_id."','".$tc."','".$name."','".$email."','".$address."','".$city."','".$country."','".$telephone."','".$user_id."','".$note."','".$start."','".$end."')")or die(mysql_error());
+
+				echo "Record was made";
+				
+	}
+	
+}else{
+	if($_GET["u"]){
+	$k=mysql_fetch_assoc(mysql_query("select * from uyelik where id='".$_GET["u"]."'"));
+}
+?>
+
+<h2>reservation Form</h2>
+				<form id="ContactForm" action="page.php?s=reser" method="post">
+					<div>
+						<div class="wrapper"><input type="text" class="input" name="name" value="<?=$k["adi_soyadi"];?>" >Name Surname:<br /></div>
+						<div class="wrapper"><input type="text" class="input" name="email" value="<?=$k["email"];?>">E-mail:<br /></div>
+                      
+						<div class="wrapper"><input type="text" class="input" name="tc" value="<?=$k["tc"];?>">TC Number :<br /></div><div class="wrapper"><input type="text" class="input" name="telephone" value="<?=$k["telefon"];?>">Telephone Number:<br /></div><div class="wrapper"><input type="text" class="input" name="address" value="<?=$k["adres"];?>">Address:<br /></div> <div class="wrapper"><input type="text" class="input" name="city" value="<?=$k["sehir"];?>" >City:<br /></div>
+                        <div class="wrapper"><input type="text" class="input" name="country" value="<?=$k["ulke"];?>">Country:<br /></div>
+                         <div class="wrapper"><textarea name="note" cols="" rows=""></textarea>
+                        Note:<br /></div>
+						<a href="#" class="button" onclick="document.getElementById('ContactForm').submit()">Send</a>
+						
+					</div>
+                    <input type="hidden" name="send" value="send">
+                    <input type="hidden" name="user_id" value="<?=$_SESSION["user_id"];?>" /><input type="hidden" name="room_id" value="<?=$_GET["r"];?>"><input type="hidden" name="start" value="<?=$_GET["start"];?>"><input type="hidden" name="end" value="<?=$_GET["end"];?>">
+				</form>
+<?php
+}
+?>
