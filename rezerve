@@ -1,0 +1,61 @@
+<form id="form_1" action="page.php" method="get">
+<input type="hidden" name="s" value="rooms" />
+						<div class="bg">
+						<div class="wrapper"><select name="sd">
+           <?php
+		   for($i=1;$i<=31;$i++){
+			   echo "<option>".$i."</option>";
+			   }
+           ?>
+           </select>
+          -
+          <select name="sm">
+           <?php
+		   for($i=1;$i<=12;$i++){
+			   echo "<option>".$i."</option>";
+			   }
+           ?>
+          </select>
+          -
+          <select name="sy">
+          <?php
+		   for($i=2013;$i<=2020;$i++){
+			   echo "<option>".$i."</option>";
+			   }
+           ?>
+          </select>
+          Depart (dd/mm/yy)</div>
+							<div class="wrapper pad_bot1"><select name="ed">
+           <?php
+		   for($i=1;$i<=31;$i++){
+			   echo "<option>".$i."</option>";
+			   }
+           ?>
+           </select>
+          -
+          <select name="em">
+           <?php
+		   for($i=1;$i<=12;$i++){
+			   echo "<option>".$i."</option>";
+			   }
+           ?>
+          </select>
+          -
+          <select name="ey">
+          <?php
+		   for($i=2013;$i<=2020;$i++){
+			   echo "<option>".$i."</option>";
+			   }
+           ?>
+          </select>
+          Return  (dd/mm/yy)</div>
+							<div class="wrapper pad_bot1">
+								<a href="#" class="button" onclick="document.getElementById('form_1').submit()">Search</a>
+								Audlts <select name="aud"><?php
+		   for($i=1;$i<=9;$i++){
+			   echo "<option>".$i."</option>";
+			   }
+           ?></select>
+							</div>
+						</div>							
+					</form>
