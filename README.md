@@ -95,5 +95,7 @@ vagrant ssh
 Hariçi bir programla (putty vb.) ssh bağlantısı için bilgiler;
 
 ip : 192.168.83.137
+
 user : vagrant
+
 password : vagrant
