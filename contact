@@ -1,0 +1,22 @@
+<?php
+$name=$_POST['name'];
+$email=$_POST['email'];
+$description=$_POST["message"];
+    if($_POST["add"]){
+				mysql_query("insert into iletisim values (NULL,'".$name."','".$email."','".$description."')")or die(mysql_error());
+	//$sid = mysql_insert_id();  
+				echo "Record was made";
+	}
+?>
+    <article class="col2 pad_left1">
+				<h2>Contact Form</h2>
+				<form id="ContactForm" action="page.php?s=contact" method="post">
+					<div>
+						<div class="wrapper"><input type="text" class="input" name="name">Name:<br /></div>
+						<div class="wrapper"><input type="text" class="input" name="email">E-mail:<br /></div>
+						<div class="wrapper"><textarea name="message" cols="1" rows="1"></textarea>Message:<br /></div><input type="hidden" name="add" value="add">
+						<a href="#" class="button" onclick="document.getElementById('ContactForm').submit()">send</a>
+						<a href="#" class="button" onclick="document.getElementById('ContactForm').reset()">clear</a>
+					</div>
+				</form>
+        	</article>
