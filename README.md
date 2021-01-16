@@ -11,22 +11,31 @@ GitHub API token Generate new token'a tıklayarak yeni bir token oluşturulmalı
 Apache sunucusu DocumentRoot (XAMMP => c:\xammp\htdocs, WAMP => c:\wamp\www) dizini içerisinde yönetici yetkileriyle terminal (komut satırı) açılarak aşağıdaki direktifler uygulanmalıdır.
 
 
+
 git clone https://github.com/kouosl/portal.git portal
+
 cd portal
+
 composer global require "fxp/composer-asset-plugin:^1.3.0"
+
 composer update
 Proje bağımlılıkları "portal/vendor" dizini altında yüklenecektir. Bu adımda sistem github api token talep edecektir. Başlangıçta üretilen token terminale kopyalanarak yapıştırılmalıdır. Yapıştırıldığında gizlilik nedeniyle token gözükmeyecektir. Onaylayarak (Enter) devam edilmelidir. Yükleme teyit edildikten sonra aşağıdaki direktifler ile Development (geliştirme) modunda proje ayar dosyaları oluşturulur ve yetkileri düzenlenir.
+
 
 
 php init --env=Development --overwrite=All
 Boş bir veritabanı oluşturulmalıdır. Veritabanı terminal veya http://localhost/phpmyadmin adresinden erişilebilen web tabanlı veritabanı yönetim sistemi ile oluşturulabilir. Oluşturulan veritabanına ait veriler aşağıdaki ayar dosyasında tanımlanmalıdır.
 
+
 @portal/common/config/main-local.php 
 Veritabanı ayarları düzenlendikten sonra migration (veritabanı aktarım) işlemleri gerçekleştirilmelidir.
 
 
+
 php yii migrate --migrationPath=@vendor/kouosl/user/migrations --interactive=0
+
 php yii migrate --migrationPath=@vendor/kouosl/sample/migrations --interactive=0
+
 Apache sunucusunun dizini altındaki httpd-vhosts.conf dosyası Proje kurulumundan sonra apachenin vhost dosyasında "NameVirtualHost *:80" ifadesinin yorum satırı kaldırılmalı ve sonuna aşağıdaki direktifler eklenerek apache tekrar başlatılmalıdır. VirtualHost ayarlarında "$DocumentRoot" bölümüne apache server kök dizini yazılmalıdır.
 
 XAMMP => c:/xammp/htdocs
