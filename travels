@@ -1,0 +1,17 @@
+<article class="col2 pad_left1">
+			  <h2>Travel</h2>
+              <?php
+$s = mysql_query("select * from tur");
+while ($ls = mysql_fetch_array($s)) {
+	?>
+				<div class="wrapper under">
+					<figure class="left marg_right1"><img src="admin/images/<?php echo $ls["resim"]; ?>" width="246" height="194"></figure>
+					<p class="pad_bot2"><strong><?php echo $ls["baslik"]; ?></strong></p>
+					<p class="pad_bot2"><?php echo $ls["aciklama"]; ?></p>
+					
+				</div>
+                <?php
+}
+				?>
+				
+	  </article>
