@@ -1,6 +1,8 @@
 
 Otel rezervasyon sitesi 
 
+Rezervasyon için tasarlanmış internet sitesi
+
 Kurulum
 
 Yerel Makine
